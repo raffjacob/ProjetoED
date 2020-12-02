@@ -1,5 +1,10 @@
 package Projeto;
-
+/***
+ * Construtor de Aluno
+ * 
+ * @author Rafael Jacob
+ *
+ */
 public class Aluno {
 	public String Matricula;
 	public String Nome;

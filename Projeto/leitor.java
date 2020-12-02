@@ -6,7 +6,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import javax.swing.JOptionPane;
-
+/***
+ * Leitura de matriz em arquivo .txt
+ * Usado para leitura de uma matriz de alunos
+ * 
+ * @author Rafael Jacob
+ *
+ */
 
 public class leitor {
 	public static String[][] lerMatriz(String[][] matriz, String path, String file) throws IOException{
@@ -18,8 +24,8 @@ public class leitor {
 			BufferedReader buffer = new BufferedReader(leitor);
 			String linha = buffer.readLine();
 			while (linha != null) {
-				for (int i = 0;i<10;i++) {
-					for (int j = 0;j<7;j++) {
+				for (int i = 0;i<matriz.length;i++) {
+					for (int j = 0;j<matriz[0].length;j++) {
 						String[] col = linha.split(",");
 						aluno[i][j] = col[j];
 					}

@@ -3,7 +3,12 @@ package Projeto;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+/***
+ * Lista encadeada de Aluno
+ * 
+ * @author Rafael Jacob
+ *
+ */
 public class Lista {
 	private Aluno primeiro, ultimo;
 	public int total = 0;

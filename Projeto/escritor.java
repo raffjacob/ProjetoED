@@ -5,9 +5,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import Lista.Lista;
+/***
+ * Algoritmo para escrita de matriz em arquivo .txt
+ * Usado para gravar os dados de uma matriz de alunos
+ * 
+ * @author Rafael Jacob
+ *
+ */
+
 public class escritor {
 	public static void escreveMatriz(String[][] matriz, String path, String file) throws IOException {
 		File arq = new File(path, file);
+		Lista lista = new Lista();
+
 		if (arq.exists() && arq.isFile()) {
 			FileWriter fileWriter = new FileWriter(arq, true);
 			PrintWriter print = new PrintWriter(fileWriter);
