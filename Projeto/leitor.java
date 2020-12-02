@@ -32,7 +32,7 @@ public class leitor {
 					linha = buffer.readLine();
 				}
 			}
-			System.out.println(aluno.length);
+//			System.out.println(aluno.length);
 			buffer.close();
 			leitor.close();
 			fluxo.close();

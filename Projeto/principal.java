@@ -4,33 +4,47 @@ import java.io.IOException;
 
 import Lista.Aluno;
 import Lista.Lista;
+import Projeto.Fila;
 
 public class principal {
 
 	public static void main(String[] args) {
 		Lista lista = new Lista();
+		Fila fila = new Fila();
 		String pathTemp = "C:\\TEMP";
-		String lerArq = "alunos.txt";
-		String escArq = "alunosOrd.txt";
-		String[][] aluno = new String[1000][7];
+		String lerArq = "teste.txt";
+		String escArq = "AlunosOrd.txt";
+		String[][] matrizAlunos = new String[10][7];
 		int inicio = 0;
-		int fim = aluno.length - 1;
+		int fim = matrizAlunos.length - 1;
 		
 		try {
-			double start = System.currentTimeMillis();
-			aluno = leitor.lerMatriz(aluno, pathTemp, lerArq);
+			double TI = System.currentTimeMillis();
+			matrizAlunos = leitor.lerMatriz(matrizAlunos, pathTemp, lerArq);
 //			lista.mostra();			
-			aluno = quickSort.quick(aluno, inicio, fim);
-			for(int i=0;i<aluno.length;i++) {
-				Aluno cadastro = new Aluno(aluno[i][0], aluno[i][1], aluno[i][2], Float.parseFloat(aluno[i][3]), Float.parseFloat(aluno[i][4]), Float.parseFloat(aluno[i][5]), Float.parseFloat(aluno[i][6]));
-				lista.adiciona(cadastro);				
+			matrizAlunos = quickSort.quick(matrizAlunos, inicio, fim);
+			for(int i=0;i<matrizAlunos.length;i++) {
+				Aluno cadastro = new Aluno(
+						matrizAlunos[i][0]
+						, matrizAlunos[i][1]
+						, matrizAlunos[i][2]
+						, Float.parseFloat(matrizAlunos[i][3])
+						, Float.parseFloat(matrizAlunos[i][4])
+						, Float.parseFloat(matrizAlunos[i][5])
+						, Float.parseFloat(matrizAlunos[i][6]));
+//				lista.adiciona(cadastro);
+				fila.adicionar(cadastro);
+//				matrizAlunos = converteAluno.conversor(cadastro, matrizAlunos);
 			}
 //			lista.mostra();
-			escritor.escreveMatriz(aluno, pathTemp, escArq);
-			double elapsed = (System.currentTimeMillis() - start)/1000;
-			System.out.println("Tempo medido: " + elapsed+" segundos");
+			fila.mostra();
+			fila.remover();
+			fila.mostra();
+//			matrizAlunos = converteAluno.conversor(cadastro, matrizAlunos);
+			escritor.escreveMatriz(matrizAlunos, pathTemp, escArq);
+			double TF = (System.currentTimeMillis() - TI)/1000;
+			System.out.println("Tempo medido: " + TF +" segundos");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
