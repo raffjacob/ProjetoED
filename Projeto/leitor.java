@@ -18,6 +18,7 @@ public class leitor {
 	public static String[][] lerMatriz(String[][] matriz, String path, String file) throws IOException{
 		File arq = new File(path, file);
 		String[][] aluno = matriz;
+//		Verifica se o arquivo existe para então realizar a leitura
 		if (arq.exists() && arq.isFile()) {
 			FileInputStream fluxo = new FileInputStream(arq);
 			InputStreamReader leitor = new InputStreamReader(fluxo);
@@ -26,16 +27,17 @@ public class leitor {
 			while (linha != null) {
 				for (int i = 0;i<matriz.length;i++) {
 					for (int j = 0;j<matriz[0].length;j++) {
-						String[] col = linha.split(",");
+//						Realiza a leitura da linha separando por ;
+						String[] col = linha.split(";");
 						aluno[i][j] = col[j];
 					}
 					linha = buffer.readLine();
 				}
 			}
-//			System.out.println(aluno.length);
 			buffer.close();
 			leitor.close();
 			fluxo.close();
+//		Apresenta erro caso o arquivo não exista
 		} else {
 			JOptionPane.showMessageDialog(null, "Arquivo não existe!");
 		}

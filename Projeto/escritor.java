@@ -17,14 +17,15 @@ import java.io.PrintWriter;
 public class escritor {
 	public static void escreveMatriz(String[][] matriz, String path, String file) throws IOException {
 		File arq = new File(path, file);
-//		Lista lista = new Lista();
-
+//		Verifica se o arquivo existe para então ser escrito
 		if (arq.exists() && arq.isFile()) {
 			FileWriter fileWriter = new FileWriter(arq, true);
 			PrintWriter print = new PrintWriter(fileWriter);
 			StringBuffer cadastro = new StringBuffer();
+//			Loop para a escrita da matriz de alunos
 			for (int i = 0; i<matriz.length;i++) {
 				for (int j = 0;j<matriz[0].length;j++) {
+//					Escreve cada linha separando por ;
 					cadastro.append(matriz[i][j]);
 					cadastro.append(";");
 				}
@@ -34,6 +35,7 @@ public class escritor {
 			print.flush();
 			print.close();
 			fileWriter.close();
+//		Cria o arquivo caso não exista
 		} else {
 			FileWriter fileWriter = new FileWriter(arq, true);
 			PrintWriter print = new PrintWriter(fileWriter);

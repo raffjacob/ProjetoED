@@ -7,7 +7,8 @@ public class Fila {
 	    int tamanho;
 	    int qtdeElementos;
 	    int f[];
-
+	    
+//	    Classe construtora da Fila
 	    public Fila(){
 	        inicio = fim = -1;
 	        tamanho = 1000;
@@ -16,6 +17,7 @@ public class Fila {
 	        qtdeElementos = 0;
 	    }
 
+//	    Verifica ese a Fila esta vazia
 	    public boolean estaVazia(){
 	        if (qtdeElementos == 0){
 	            return true;
@@ -23,6 +25,7 @@ public class Fila {
 	        return false;
 	    }
 	    
+//	    Verifica se a Fila esta cheia
 	    public boolean estaCheia(){
 	        if (qtdeElementos == tamanho - 1){
 	            return true;
@@ -30,6 +33,7 @@ public class Fila {
 	        return false;
 	    }
 	    
+//	    Adiciona um elemento de Aluno na Fila
 	    public void adicionar(Aluno aluno){
 	        if (! estaCheia()){
 	        	if (qtdeElementos == 0) {
@@ -47,9 +51,9 @@ public class Fila {
 	        }
 	    }
 	    
+//	    Remove um elemento de Aluno da Fila, removendo pelo primeiro da Fila
 	    public void remover(){
 	        if (! estaVazia() ){
-//	            inicio++;
 	            primeiro = primeiro.getProximo();
 	            qtdeElementos--;
 	        } else {
@@ -58,6 +62,7 @@ public class Fila {
 	        }
 	    }
 	    
+//	    Mostre os elementos da Fila
 	    public void mostra() {
 	    	Aluno aux = primeiro;
 	    	int cont = qtdeElementos;

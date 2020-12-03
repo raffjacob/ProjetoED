@@ -6,59 +6,61 @@ public class principal {
 
 	public static void main(String[] args) {
 		
-		Fila filaQS = new Fila();
-		Fila filaSS = new Fila();
-		String pathTemp = "C:\\TEMP";
-		String lerArq = "alunos.txt";
-		String escArq1 = "alunosOrdQuickSort.txt";
-		String escArq2 = "alunosOrdSelectionSort.txt";
-		String[][] aluno = new String[1000][7];
+		Fila fila_quickSort = new Fila();
+		Fila fila_selectionSort = new Fila();
+		String caminho_arquivos = "C:\\TEMP";
+		String arquivo_leitura = "alunos.txt";
+		String arquivo_escrita_quicksort = "alunosOrdQuickSort.txt";
+		String arquivo_escrita_selectionSort = "alunosOrdSelectionSort.txt";
+//		Definido uma matriz com o número de linhas igual a quantidade de linhas do arquivo de leitura
+		String[][] matriz_alunos = new String[1000][7];
 		int inicio = 0;
-		int fim = aluno.length - 1;
+		int fim = matriz_alunos.length - 1;
 		selectionSort ss = new selectionSort();
 		
 		System.out.println("");
-		System.out.println("Arquivo que os algoritimos vão ler, usa-lo para preencher a matriz e ordena-la: "+lerArq);
+		System.out.println("Arquivo que os algoritimos vão ler, usa-lo para preencher a matriz e ordena-la: "+arquivo_leitura);
 		System.out.println("");
 		System.out.println("Tamanho da matriz que será ordenada: [1000][7]");
 		System.out.println(" ");
 		
 		try {
+//			Realiza o teste para o Quick Sort, começa contagem do processo, realiza a leitura, ordenação e escrita.
+			double tempo_inicial_1 = System.currentTimeMillis();
 			
-			double TI1 = System.currentTimeMillis();
+			matriz_alunos = leitor.lerMatriz(matriz_alunos, caminho_arquivos, arquivo_leitura);
 			
-			aluno = leitor.lerMatriz(aluno, pathTemp, lerArq);
-
-			aluno = quickSort.quick(aluno, inicio, fim);
+			matriz_alunos = quickSort.quick(matriz_alunos, inicio, fim);
 			
-			for(int i=0;i<aluno.length;i++) {
-				Aluno cadastro = new Aluno(aluno[i][0], aluno[i][1], aluno[i][2], Float.parseFloat(aluno[i][3]), Float.parseFloat(aluno[i][4]), Float.parseFloat(aluno[i][5]), Float.parseFloat(aluno[i][6]));
-				filaQS.adicionar(cadastro);				
+			for(int i=0;i<matriz_alunos.length;i++) {
+				Aluno cadastro = new Aluno (matriz_alunos[i][0], matriz_alunos[i][1], matriz_alunos[i][2], Float.parseFloat(matriz_alunos[i][3]), Float.parseFloat(matriz_alunos[i][4]), Float.parseFloat(matriz_alunos[i][5]), Float.parseFloat(matriz_alunos[i][6]));
+				fila_quickSort.adicionar(cadastro);				
 			}
 			
-			escritor.escreveMatriz(aluno, pathTemp, escArq1);
-			double TF1 = (System.currentTimeMillis() - TI1)/1000;
-			System.out.println("Tempo usado pelo Quick Sort: " + TF1+" segundos");
+			escritor.escreveMatriz(matriz_alunos, caminho_arquivos, arquivo_escrita_quicksort);
+			double tempo_final_1 = (System.currentTimeMillis() - tempo_inicial_1)/1000;
+			System.out.println("Tempo usado pelo Quick Sort: " + tempo_final_1+" segundos");
 			System.out.println("");
-			System.out.println("Arquivo salvo em: "+escArq1);
+			System.out.println("Arquivo salvo em: "+arquivo_escrita_quicksort);
 			System.out.println("");
 			// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			
-			double TI2 = System.currentTimeMillis();
-			aluno = leitor.lerMatriz(aluno, pathTemp, lerArq);
+//			Realiza o teste para o Selection Sort, começa contagem do processo, realiza a leitura, ordenação e escrita.
+			double tempo_inicial_2 = System.currentTimeMillis();
+			matriz_alunos = leitor.lerMatriz(matriz_alunos, caminho_arquivos, arquivo_leitura);
 				
-			ss.SelectionSort(aluno);
+			ss.SelectionSort(matriz_alunos);
 			
-			for(int i=0;i<aluno.length;i++) {
-				Aluno cadastro = new Aluno(aluno[i][0], aluno[i][1], aluno[i][2], Float.parseFloat(aluno[i][3]), Float.parseFloat(aluno[i][4]), Float.parseFloat(aluno[i][5]), Float.parseFloat(aluno[i][6]));
-				filaSS.adicionar(cadastro);				
+			for(int i=0;i<matriz_alunos.length;i++) {
+				Aluno cadastro = new Aluno (matriz_alunos[i][0], matriz_alunos[i][1], matriz_alunos[i][2], Float.parseFloat(matriz_alunos[i][3]), Float.parseFloat(matriz_alunos[i][4]), Float.parseFloat(matriz_alunos[i][5]), Float.parseFloat(matriz_alunos[i][6]));
+				fila_selectionSort.adicionar(cadastro);				
 			}
 			
-			escritor.escreveMatriz(aluno, pathTemp, escArq2);
-			double TF2 = (System.currentTimeMillis() - TI2)/1000;
-			System.out.println("Tempo usado pelo Selection Sort: " + TF2+" segundos");
+			escritor.escreveMatriz(matriz_alunos, caminho_arquivos, arquivo_escrita_selectionSort);
+			double tempo_final_2 = (System.currentTimeMillis() - tempo_inicial_2)/1000;
+			System.out.println("Tempo usado pelo Selection Sort: " + tempo_final_2+" segundos");
 			System.out.println("");
-			System.out.println("Arquivo salvo em: "+escArq2);
+			System.out.println("Arquivo salvo em: "+arquivo_escrita_selectionSort);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
