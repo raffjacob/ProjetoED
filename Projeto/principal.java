@@ -2,48 +2,64 @@ package Projeto;
 
 import java.io.IOException;
 
-import Lista.Aluno;
-import Lista.Lista;
-import Projeto.Fila;
-
 public class principal {
 
 	public static void main(String[] args) {
-		Lista lista = new Lista();
-		Fila fila = new Fila();
+		
+		Fila filaQS = new Fila();
+		Fila filaSS = new Fila();
 		String pathTemp = "C:\\TEMP";
-		String lerArq = "teste.txt";
-		String escArq = "AlunosOrd.txt";
-		String[][] matrizAlunos = new String[10][7];
+		String lerArq = "alunos.txt";
+		String escArq1 = "alunosOrdQuickSort.txt";
+		String escArq2 = "alunosOrdSelectionSort.txt";
+		String[][] aluno = new String[1000][7];
 		int inicio = 0;
-		int fim = matrizAlunos.length - 1;
+		int fim = aluno.length - 1;
+		selectionSort ss = new selectionSort();
+		
+		System.out.println("");
+		System.out.println("Arquivo que os algoritimos vão ler, usa-lo para preencher a matriz e ordena-la: "+lerArq);
+		System.out.println("");
+		System.out.println("Tamanho da matriz que será ordenada: [1000][7]");
+		System.out.println(" ");
 		
 		try {
-			double TI = System.currentTimeMillis();
-			matrizAlunos = leitor.lerMatriz(matrizAlunos, pathTemp, lerArq);
-//			lista.mostra();			
-			matrizAlunos = quickSort.quick(matrizAlunos, inicio, fim);
-			for(int i=0;i<matrizAlunos.length;i++) {
-				Aluno cadastro = new Aluno(
-						matrizAlunos[i][0]
-						, matrizAlunos[i][1]
-						, matrizAlunos[i][2]
-						, Float.parseFloat(matrizAlunos[i][3])
-						, Float.parseFloat(matrizAlunos[i][4])
-						, Float.parseFloat(matrizAlunos[i][5])
-						, Float.parseFloat(matrizAlunos[i][6]));
-//				lista.adiciona(cadastro);
-				fila.adicionar(cadastro);
-//				matrizAlunos = converteAluno.conversor(cadastro, matrizAlunos);
+			
+			double TI1 = System.currentTimeMillis();
+			
+			aluno = leitor.lerMatriz(aluno, pathTemp, lerArq);
+
+			aluno = quickSort.quick(aluno, inicio, fim);
+			
+			for(int i=0;i<aluno.length;i++) {
+				Aluno cadastro = new Aluno(aluno[i][0], aluno[i][1], aluno[i][2], Float.parseFloat(aluno[i][3]), Float.parseFloat(aluno[i][4]), Float.parseFloat(aluno[i][5]), Float.parseFloat(aluno[i][6]));
+				filaQS.adicionar(cadastro);				
 			}
-//			lista.mostra();
-			fila.mostra();
-			fila.remover();
-			fila.mostra();
-//			matrizAlunos = converteAluno.conversor(cadastro, matrizAlunos);
-			escritor.escreveMatriz(matrizAlunos, pathTemp, escArq);
-			double TF = (System.currentTimeMillis() - TI)/1000;
-			System.out.println("Tempo medido: " + TF +" segundos");
+			
+			escritor.escreveMatriz(aluno, pathTemp, escArq1);
+			double TF1 = (System.currentTimeMillis() - TI1)/1000;
+			System.out.println("Tempo usado pelo Quick Sort: " + TF1+" segundos");
+			System.out.println("");
+			System.out.println("Arquivo salvo em: "+escArq1);
+			System.out.println("");
+			// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			
+			double TI2 = System.currentTimeMillis();
+			aluno = leitor.lerMatriz(aluno, pathTemp, lerArq);
+				
+			ss.SelectionSort(aluno);
+			
+			for(int i=0;i<aluno.length;i++) {
+				Aluno cadastro = new Aluno(aluno[i][0], aluno[i][1], aluno[i][2], Float.parseFloat(aluno[i][3]), Float.parseFloat(aluno[i][4]), Float.parseFloat(aluno[i][5]), Float.parseFloat(aluno[i][6]));
+				filaSS.adicionar(cadastro);				
+			}
+			
+			escritor.escreveMatriz(aluno, pathTemp, escArq2);
+			double TF2 = (System.currentTimeMillis() - TI2)/1000;
+			System.out.println("Tempo usado pelo Selection Sort: " + TF2+" segundos");
+			System.out.println("");
+			System.out.println("Arquivo salvo em: "+escArq2);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -51,3 +67,4 @@ public class principal {
 	}
 
 }
+

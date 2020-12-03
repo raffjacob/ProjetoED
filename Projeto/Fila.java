@@ -1,9 +1,5 @@
 package Projeto;
 
-//import javax.swing.JOptionPane;
-
-import Lista.Aluno;
-
 public class Fila {
 		private Aluno primeiro, ultimo;
 	    int inicio;
@@ -14,7 +10,7 @@ public class Fila {
 
 	    public Fila(){
 	        inicio = fim = -1;
-	        tamanho = 100;
+	        tamanho = 1000;
 	        tamanho++;
 	        f = new int[tamanho];
 	        qtdeElementos = 0;
